@@ -1,0 +1,58 @@
+
+
+
+25.
+SELECT company_mast.COM_ID, item_mast.PRO_PRICE
+       FROM company_mast
+         INNER JOIN item_mast
+           ON company_mast.COM_ID = item.mast.PRO_COM
+	WHERE item_mast.PRO_PRICE = (SELECT MAX(item_mast.PRO_PRICE) FROM item_mast WHERE 
+
+
+
+SELECT A.pro_name, A.pro_price, F.com_name
+   FROM item_mast A INNER JOIN company_mast F
+   ON A.pro_com = F.com_id
+     AND A.pro_price =
+     (
+       SELECT MAX(A.pro_price)
+         FROM item_mast A
+         WHERE A.pro_com = F.com_id
+     );
+
+26.
+SELECT *
+       FROM emp_details 
+         INNER JOIN emp_department
+           ON emp_details.emp_dept = emp_department.dpt_code;
+
+27.
+SELECT emp_details.emp_fname AS "First Name", emp_lname AS "Last Name", 
+    emp_department.dpt_name AS "Department", 
+     dpt_allotment AS "Amount Allotted"
+       FROM emp_details 
+         INNER JOIN emp_department
+           ON emp_details.emp_dept = emp_department.dpt_code;
+
+28.
+SELECT emp_details.emp_lname, emp_details.emp_fname
+FROM emp_department
+INNER JOIN emp_details
+	ON dpt_code = emp_dept
+WHERE emp_department.dpt_allotment >50000;
+
+
+29.
+SELECT emp_department.dpt_name
+FROM emp_details
+LEFT JOIN emp_department
+ ON emp_dept = dpt_code
+GROUP BY emp_department.dpt_name
+HAVING COUNT(*) >2;
+
+SELECT emp_department.dpt_name
+  FROM emp_details 
+     LEFT JOIN emp_department
+       ON emp_dept =dpt_code
+        GROUP BY emp_department.dpt_name
+          HAVING COUNT(*) > 2;
